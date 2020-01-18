@@ -28,24 +28,26 @@ namespace ConsoleApp1
                 x++;
             }
 
-            Console.WriteLine("\n\npick your poison" + &block);
+            Console.WriteLine("\n\npick your poison");
             Console.WriteLine("1. Insertion sort");
             Console.WriteLine("2. Bubble sort");
-            Console.WriteLine("3. Merg sort");
+            Console.WriteLine("3. Merge sort");
             Console.WriteLine("4. quicksort\n");
 
             Stopwatch sw = new Stopwatch();
             int temp;
             int choice = int.Parse(Console.ReadLine());
-            switch(choice)
+            switch (choice)
             {
                 case 1:
                     //insertion sort
                     Console.WriteLine("\nSorting...\n");
-                    
+
+                    sw.Start();
+
                     int a = 1;
                     int b = a;
-                    sw.Start();
+
                     while (a < num.Length)
                     {
                         b = a;
@@ -58,29 +60,32 @@ namespace ConsoleApp1
                         }
                         a++;
                     }
+
                     sw.Stop();
+
                     for (int y = 0; y < num.Length; y++)
                     {
                         Console.Write(num[y] + " ");
                     }
 
-                    Console.WriteLine("\ndet tog={0} tidenheter", sw.Elapsed);
+                    Console.WriteLine("\ninsertion sort tog={0} tidenheter", sw.Elapsed);
                     Console.WriteLine("\nklicka enter för att starta om");
                     Console.ReadKey();
                     Console.Clear();
                     Main(null);
                     break;
 
-                case 2: 
+                case 2:
                     //bubble sort
                     Console.WriteLine("\nSorting...\n");
 
                     sw.Start();
-                    for(int i = 0; i <= num.Length; i++)
+
+                    for (int i = 0; i <= num.Length; i++)
                     {
-                        for(int j = 0; j < num.Length - 1; j++)
+                        for (int j = 0; j < num.Length - 1; j++)
                         {
-                            if(num[j] > num[j + 1])
+                            if (num[j] > num[j + 1])
                             {
                                 temp = num[j + 1];
                                 num[j + 1] = num[j];
@@ -88,13 +93,15 @@ namespace ConsoleApp1
                             }
                         }
                     }
+
                     sw.Stop();
+
                     for (int y = 0; y < num.Length; y++)
                     {
                         Console.Write(num[y] + " ");
                     }
 
-                    Console.WriteLine("\ndet tog={0} tidenheter", sw.Elapsed);
+                    Console.WriteLine("\nbubble sort tog={0} tidenheter", sw.Elapsed);
                     Console.WriteLine("\nklicka enter för att starta om");
                     Console.ReadKey();
                     Console.Clear();
@@ -102,10 +109,12 @@ namespace ConsoleApp1
                     break;
 
                 case 3:
-                    //merg sort
+                    //merge sort
                     Console.WriteLine("\nSorting...\n");
 
                     sw.Start();
+
+                    TestMergeSort();
                         
                     sw.Stop();
 
@@ -114,7 +123,7 @@ namespace ConsoleApp1
                         Console.Write(num[y] + " ");
                     }
 
-                    Console.WriteLine("\ndet tog={0} tidenheter", sw.Elapsed);
+                    Console.WriteLine("\nmerge sort tog={0} tidenheter", sw.Elapsed);
                     Console.WriteLine("\nklicka enter för att starta om");
                     Console.ReadKey();
                     Console.Clear();
@@ -126,6 +135,8 @@ namespace ConsoleApp1
                     Console.WriteLine("\nSorting...\n");
 
                     sw.Start();
+
+                    
                         
                     sw.Stop();
 
@@ -134,7 +145,7 @@ namespace ConsoleApp1
                         Console.Write(num[y] + " ");
                     }
 
-                    Console.WriteLine("\ndet tog={0} tidenheter", sw.Elapsed);
+                    Console.WriteLine("\nquicksort tog={0} tidenheter", sw.Elapsed);
                     Console.WriteLine("\nklicka enter för att starta om");
                     Console.ReadKey();
                     Console.Clear();
@@ -149,6 +160,11 @@ namespace ConsoleApp1
                     Main(null);
                     break;
             }
+        }
+
+        private static void TestMergeSort(ref int[] num)
+        {
+            num.DoMergeSort();
         }
     }
 }
