@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ConsoleApp1
 {
@@ -112,15 +114,18 @@ namespace ConsoleApp1
                     //merge sort
                     Console.WriteLine("\nSorting...\n");
 
+                    List<int> unsorted = new List<int>(num);       //Add all num[] elements to unsorted List<int>
+                    List<int> sorted;
+
                     sw.Start();
 
-                    TestMergeSort();
-                        
+                    sorted = MergeSort(unsorted);
+
                     sw.Stop();
 
-                    for (int y = 0; y < num.Length; y++)
+                    for (int y = 0; y < sorted.Count; y++)
                     {
-                        Console.Write(num[y] + " ");
+                        Console.Write(sorted[y] + " ");
                     }
 
                     Console.WriteLine("\nmerge sort tog={0} tidenheter", sw.Elapsed);
@@ -136,8 +141,8 @@ namespace ConsoleApp1
 
                     sw.Start();
 
-                    
-                        
+
+
                     sw.Stop();
 
                     for (int y = 0; y < num.Length; y++)
@@ -162,9 +167,60 @@ namespace ConsoleApp1
             }
         }
 
-        private static void TestMergeSort(ref int[] num)
+        private static List<int> MergeSort(List<int> unsorted)
         {
-            num.DoMergeSort();
+            if (unsorted.Count <= 1)
+                return unsorted;
+
+            List<int> left = new List<int>();
+            List<int> right = new List<int>();
+
+            int middle = unsorted.Count / 2;
+            for(int i = 0; i < middle; i++)
+            {
+                left.Add(unsorted[i]);
+            }
+            for(int i = middle; i < unsorted.Count; i++)
+            {
+                right.Add(unsorted[i]);
+            }
+
+            left = MergeSort(left);
+            right = MergeSort(right);
+            return Merge(left, right);
+        }
+
+        private static List<int> Merge(List<int> left, List<int> right)
+        {
+            List<int> result = new List<int>();
+
+            while(left.Count > 0 || right.Count > 0)
+            {
+                if(left.Count > 0 && right.Count > 0)
+                {
+                    if(left.First() <= right.First())
+                    {
+                        result.Add(left.First());
+                        left.Remove(left.First());
+                    }
+                    else
+                    {
+                        result.Add(right.First());
+                        right.Remove(right.First());
+                    }
+                }
+                else if(left.Count > 0)
+                {
+                    result.Add(left.First());
+                    left.Remove(left.First());
+                }
+                else if(right.Count > 0)
+                {
+                    result.Add(right.First());
+                    right.Remove(right.First());        
+                }
+            }
+            return result;
         }
     }
 }
