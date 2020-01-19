@@ -141,7 +141,7 @@ namespace ConsoleApp1
 
                     sw.Start();
 
-
+                    QuickSort(num, 0, num.Length - 1);      //funkar inte
 
                     sw.Stop();
 
@@ -167,7 +167,7 @@ namespace ConsoleApp1
             }
         }
 
-        private static List<int> MergeSort(List<int> unsorted)
+        private static List<int> MergeSort(List<int> unsorted)      //mergesort
         {
             if (unsorted.Count <= 1)
                 return unsorted;
@@ -176,11 +176,11 @@ namespace ConsoleApp1
             List<int> right = new List<int>();
 
             int middle = unsorted.Count / 2;
-            for(int i = 0; i < middle; i++)
+            for (int i = 0; i < middle; i++)
             {
                 left.Add(unsorted[i]);
             }
-            for(int i = middle; i < unsorted.Count; i++)
+            for (int i = middle; i < unsorted.Count; i++)
             {
                 right.Add(unsorted[i]);
             }
@@ -190,15 +190,15 @@ namespace ConsoleApp1
             return Merge(left, right);
         }
 
-        private static List<int> Merge(List<int> left, List<int> right)
+        private static List<int> Merge(List<int> left, List<int> right)     //mergesort
         {
             List<int> result = new List<int>();
 
-            while(left.Count > 0 || right.Count > 0)
+            while (left.Count > 0 || right.Count > 0)
             {
-                if(left.Count > 0 && right.Count > 0)
+                if (left.Count > 0 && right.Count > 0)
                 {
-                    if(left.First() <= right.First())
+                    if (left.First() <= right.First())
                     {
                         result.Add(left.First());
                         left.Remove(left.First());
@@ -209,18 +209,67 @@ namespace ConsoleApp1
                         right.Remove(right.First());
                     }
                 }
-                else if(left.Count > 0)
+                else if (left.Count > 0)
                 {
                     result.Add(left.First());
                     left.Remove(left.First());
                 }
-                else if(right.Count > 0)
+                else if (right.Count > 0)
                 {
                     result.Add(right.First());
-                    right.Remove(right.First());        
+                    right.Remove(right.First());
                 }
             }
             return result;
+        }
+
+        private static int[] QuickSort(int[] num, int left, int right)       //quicksort
+        {
+            if (left < right)
+            {
+                int pivot = Partition(num, left, right);
+
+                if (pivot > 1)
+                {
+                    QuickSort(num, left, pivot - 1);
+                }
+                if (pivot + 1 < right)
+                {
+                    QuickSort(num, pivot + 1, right);
+                }
+            }
+            return num;
+        }
+
+        private static int Partition(int[] num, int left, int right)        //quicksort
+        {
+            int pivot = num[left];
+            while (true)
+            {
+                while (num[left] < pivot)
+                {
+                    left++;
+                }
+                while (num[right] > pivot)
+                {
+                    right--;
+                }
+                if (left < right)
+                {
+                    if (num[left] == num[right])
+                    {
+                        return right;
+                    }
+
+                    int temp = num[left];
+                    num[left] = num[right];
+                    num[right] = temp;
+                }
+                else
+                {
+                    return right;
+                }
+            }
         }
     }
 }
