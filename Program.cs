@@ -223,7 +223,7 @@ namespace ConsoleApp1
             return result;
         }
 
-        private static int[] QuickSort(int[] num, int left, int right)       //quicksort
+        private static void QuickSort(int[] num, int left, int right)       //quicksort
         {
             if (left < right)
             {
@@ -235,10 +235,9 @@ namespace ConsoleApp1
                 }
                 if (pivot + 1 < right)
                 {
-                    QuickSort(num, pivot + 1, right);
+                    QuickSort(num, right, pivot + 1);
                 }
             }
-            return num;
         }
 
         private static int Partition(int[] num, int left, int right)        //quicksort
@@ -256,15 +255,15 @@ namespace ConsoleApp1
                 }
                 if (left < right)
                 {
-                    if (num[left] == num[right])
-                    {
-                        return right;
-                    }
-
-                    int temp = num[left];
-                    num[left] = num[right];
-                    num[right] = temp;
-                }
+                    if (num[left] == num[right])        //  if (left < right)
+                    {                                   //  {
+                        return right;                   //      int temp = num[left];
+                    }                                   //      num[left] = num[right];
+                                                        //      num[right] = temp;
+                    int temp = num[left];               //  }
+                    num[left] = num[right];             //  if(num[left] == num[right]){
+                    num[right] = temp;                  //      left++
+                }                                       //  }
                 else
                 {
                     return right;
