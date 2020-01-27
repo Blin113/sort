@@ -255,15 +255,15 @@ namespace ConsoleApp1
                 }
                 if (left < right)
                 {
-                    if (num[left] == num[right])        //  if (left < right)
-                    {                                   //  {
-                        return right;                   //      int temp = num[left];
-                    }                                   //      num[left] = num[right];
-                                                        //      num[right] = temp;
-                    int temp = num[left];               //  }
-                    num[left] = num[right];             //  if(num[left] == num[right]){
-                    num[right] = temp;                  //      left++
-                }                                       //  }
+                    int temp = num[left];
+                    num[left] = num[right];
+                    num[right] = temp;
+
+                    if (num[left] == num[right])
+                    {
+                        left++;
+                    }
+                }
                 else
                 {
                     return right;
@@ -272,3 +272,4 @@ namespace ConsoleApp1
         }
     }
 }
+
