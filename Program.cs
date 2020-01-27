@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
@@ -114,7 +114,7 @@ namespace ConsoleApp1
                     //merge sort
                     Console.WriteLine("\nSorting...\n");
 
-                    List<int> unsorted = new List<int>(num);       //Add all num[] elements to unsorted List<int>
+                    List<int> unsorted = new List<int>(num);
                     List<int> sorted;
 
                     sw.Start();
@@ -223,53 +223,43 @@ namespace ConsoleApp1
             return result;
         }
 
-        private static void QuickSort(int[] num, int left, int right)       //quicksort
+        private static void QuickSort(int[] array, int low, int high)       //quicksort
         {
-            if (left < right)
+            if (low < high)
             {
-                int pivot = Partition(num, left, right);
+                int partitionIndex = Partition(array, low, high);
 
-                if (pivot > 1)
-                {
-                    QuickSort(num, left, pivot - 1);
-                }
-                if (pivot + 1 < right)
-                {
-                    QuickSort(num, right, pivot + 1);
-                }
+                QuickSort(array, low, partitionIndex - 1);
+                QuickSort(array, partitionIndex + 1, high);
             }
         }
 
-        private static int Partition(int[] num, int left, int right)        //quicksort
-        {
-            int pivot = num[left];
-            while (true)
-            {
-                while (num[left] < pivot)
-                {
-                    left++;
-                }
-                while (num[right] > pivot)
-                {
-                    right--;
-                }
-                if (left < right)
-                {
-                    int temp = num[left];
-                    num[left] = num[right];
-                    num[right] = temp;
+    public static int Partition(int[] array, int low, int high)
+    {
 
-                    if (num[left] == num[right])
-                    {
-                        left++;
-                    }
-                }
-                else
-                {
-                    return right;
-                }
+        int pivot = array[high];
+
+        int lowIndex = (low - 1);
+
+      
+        for (int i = low; i < high; i++)
+        {
+            if (array[i] <= pivot)
+            {
+                lowIndex++;
+
+                int temp = array[lowIndex];
+                array[lowIndex] = array[i];
+                array[i] = temp;
             }
         }
+
+        int temp1 = array[lowIndex + 1];
+        array[lowIndex + 1] = array[high];
+        array[high] = temp1;
+
+        return lowIndex + 1;
+    }
+
     }
 }
-
