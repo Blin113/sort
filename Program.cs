@@ -9,7 +9,7 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("please enter the desired ammount of random numbers to sort.");
+            Console.WriteLine("Please enter the desired ammount of random numbers to sort.");
             int ammount = int.Parse(Console.ReadLine());
 
             Console.WriteLine("please enter the desired range for the random numbers, from.");
